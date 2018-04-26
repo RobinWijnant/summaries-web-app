@@ -1,0 +1,16 @@
+// Aanmaken migration file
+php artisan make:migration create_schools_table --create=schools
+
+// Db structuur maken
+php artisan migrate
+
+// Db opvullen met seeds
+php artisan db:seed
+
+// Discover files
+composer dump autoload
+
+html5up.net
+
+// css in blade, asset verwijst naar public folder
+{{ asset(/css/screen.css) }}
