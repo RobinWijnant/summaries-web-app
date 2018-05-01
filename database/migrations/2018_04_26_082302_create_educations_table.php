@@ -16,6 +16,8 @@ class CreateEducationsTable extends Migration
         Schema::create('educations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->integer('years')->unsigned();
+            $table->enum('type', ['Master', 'Bachelor', 'HBO', 'Middelbaar']);
             $table->integer('school_id')->unsigned();
             $table->foreign('school_id')->references('id')->on('schools');
             $table->timestamps();

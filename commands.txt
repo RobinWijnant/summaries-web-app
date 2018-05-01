@@ -4,8 +4,14 @@ php artisan make:migration create_schools_table --create=schools
 // Db structuur maken
 php artisan migrate
 
+// Seed Aanmaken
+php artisan make:seeder UsersTableSeeder
+
 // Db opvullen met seeds
 php artisan db:seed
+
+// Db opvullen met seeds en migration opnieuw runnen
+php artisan migrate:refresh --seed
 
 // Discover files
 composer dump autoload
