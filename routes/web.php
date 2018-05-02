@@ -11,13 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'HomeController@show');
 
-Route::get('/search', function () {
-    return view('search');
-});
+Route::get('/summaries', 'SummariesController@show');
+
+Route::get('/summary/create', 'SummariesController@create');
 
 Route::get('/summary/{id}', function ($id) {
     return view('summary');

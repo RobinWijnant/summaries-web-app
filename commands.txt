@@ -29,3 +29,6 @@ yarn run watch
 
 // Model Aanmaken
 php artisan make:model name
+
+// Controller Aanmaken
+php artisan make:controller
