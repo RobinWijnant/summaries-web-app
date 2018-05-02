@@ -14,25 +14,25 @@ class TagsTableSeeder extends Seeder
     {
         DB::table('tags')->insert([
             'name' => 'Bind',
-            'course_id' => 1,
+            'summary_id' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
         DB::table('tags')->insert([
             'name' => 'Apache',
-            'course_id' => 1,
+            'summary_id' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
         DB::table('tags')->insert([
             'name' => 'Active Directory',
-            'course_id' => 2,
+            'summary_id' => 2,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
         DB::table('tags')->insert([
             'name' => 'DNS',
-            'course_id' => 2,
+            'summary_id' => 2,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
     }

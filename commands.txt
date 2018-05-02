@@ -14,9 +14,18 @@ php artisan db:seed
 php artisan migrate:refresh --seed
 
 // Discover files
-composer dump autoload
+composer dump-autoload
 
 html5up.net
 
 // css in blade, asset verwijst naar public folder
 {{ asset(/css/screen.css) }}
+
+// Bundle css and js
+yarn run dev
+
+// Bundle css and js (watch)
+yarn run watch
+
+// Model Aanmaken
+php artisan make:model name
