@@ -11,11 +11,20 @@
 |
 */
 
-Route::get('/', 'HomeController@show');
+Route::get('/', 'HomeController@show')
+    ->name('home');
 
-Route::get('/summaries', 'SummariesController@show');
+Route::name('summaries.')->prefix('/summaries')->group(function () {
 
-Route::get('/summary/create', 'SummariesController@create');
+    Route::get('create', 'SummariesController@create')
+        ->name('create');
+
+    Route::post('create', 'SummariesController@store')
+        ->name('store');
+
+    Route::get('search', 'SummariesController@search')
+        ->name('search');
+});
 
 Route::get('/summary/{id}', function ($id) {
     return view('summary');
@@ -27,7 +36,7 @@ Route::get('/course/{id}', function ($id) {
 
 Route::get('/login', function () {
     return view('login');
-});
+})->name('user.login');
 
 Route::get('/logout', function () {
     // logout code

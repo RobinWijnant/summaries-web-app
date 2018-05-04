@@ -19,23 +19,27 @@
 <div class="py-5">
   <div class="container">
     <div class="row">
-
-      <div class="col-md-4">
-        <div class="card mb-4 box-shadow">
-          <img class="card-img-top" src="" alt="Card image cap">
-          <div class="card-body">
-            <p class="card-text">
-              <p class="font-weight-bold">Naam van de samenvatting</p>
-              <p class="badge badge-secondary">Java</p>
-              <p class="badge badge-secondary">MySQL</p>
-            </p>
-            <div class="d-flex justify-content-between align-items-center">
-              <button type="button" class="btn btn-sm btn-outline-secondary">Bekijken</button>
-              <small class="text-muted">9 mins</small>
+      
+      @forelse ($recentSummaries as $summary)
+        <div class="col-md-3">
+          <div class="card mb-3 box-shadow">
+          <div class="card-img-top recentSummaryImg" style="background-image:url('{{ asset('img/thumbs/'.$summary->user->id.'/'.$summary->id.'_'.$summary->name.'.jpg') }}')" alt="Thumbnail {{ $summary->name }}"></div>
+            <div class="card-body">
+              <p class="card-text">
+                <p class="font-weight-bold">{{ $summary->name }}</p>
+                <p class="badge badge-secondary">Java</p>
+                <p class="badge badge-secondary">MySQL</p>
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Bekijken</button>
+                <small class="text-muted">{{ Carbon\Carbon::parse($summary->created_at)->diffForHumans() }}</small>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      @empty
+          <p>No recent summaries found</p>
+      @endforelse
       
     </div>
   </div>

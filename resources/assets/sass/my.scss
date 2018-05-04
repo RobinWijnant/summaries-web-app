@@ -1,3 +1,4 @@
+// Home - Searchbar
 #searchbar {
     max-width: 700px;
 
@@ -7,3 +8,22 @@
     } 
 }
 
+// Home - Recent Summaries - Card image
+.recentSummaryImg {
+    height: 150px;
+    background-size: cover;
+    background-position: top center;
+}
+
+// Nav - Vertical separator
+.navSeparator {
+    display: none;
+}
+
+@include media-breakpoint-up(sm) {
+
+    // Nav - Vertical separator
+    .navSeparator {
+        display: inline-block;
+    }
+}

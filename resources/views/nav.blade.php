@@ -9,18 +9,18 @@
         </button>
         <div class="collapse navbar-collapse right" id="navbarTogglerTest">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link mr-2" href="#">Home <span class="sr-only">(current)</span></a>
+            <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
+              <a class="nav-link mr-2" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link mr-2" href="#">Samenvattingen</a>
+            <li class="nav-item {{ Request::is('search') ? 'active' : '' }}">
+              <a class="nav-link mr-2" href="{{ route('summaries.search') }}">Samenvattingen</a>
             </li>
-            <li class="nav-item"><span class="nav-link mr-2" href="#">|</span></li>
-            <li class="nav-item">
-                <a class="nav-link mr-3" href="#">Login</a>
+            <li class="nav-item navSeparator"><span class="nav-link mr-2" href="#">|</span></li>
+            <li class="nav-item {{ Request::is('login') ? 'active' : '' }}">
+                <a class="nav-link mr-3" href="{{ route('user.login') }}">Login</a>
               </li>
             <li class="nav-item">
-              <a class="btn btn-outline-primary btn-sm mt-1" href="#">Toevoegen</a>
+              <a class="btn btn-outline-primary btn-sm mt-1" href="{{ route('summaries.create') }}">Toevoegen</a>
             </li>
           </ul>
         </div>

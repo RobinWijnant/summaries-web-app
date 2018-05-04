@@ -13,11 +13,16 @@
         "axios": "^0.17",
         "bootstrap": "^4.0.0",
         "cross-env": "^5.1.4",
+        "font-awesome": "^4.7.0",
         "jquery": "^3.1.1",
         "laravel-mix": "^1.0",
         "lodash": "^4.17.4",
         "popper.js": "^1.12.9",
-        "vue": "^2.5.7",
-        "font-awesome": "^4.7.0"
+        "vue": "^2.5.7"
+    },
+    "dependencies": {
+        "select2": "^4.0.6-rc.1",
+        "select2-bootstrap-theme": "^0.1.0-beta.10",
+        "select2-bootstrap4-theme": "^1.0.0"
     }
 }
