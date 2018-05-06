@@ -8,8 +8,8 @@
 
     {!! Form::open(['route' => 'summaries.store', 'method' => 'POST']) !!}
         <div class="form-group">
-            {{ Form::label('name', 'Naam') }}
-            {{ Form::text('name', '', ['class' => 'form-control']) }}
+            {{ Form::label('name', 'Titel') }}
+            {{ Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Titel']) }}
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">

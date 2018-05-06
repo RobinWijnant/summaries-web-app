@@ -6,6 +6,16 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateUsersTable extends Migration
 {
+    // The attributes that are mass assignable.
+    protected $fillable = [
+        'firstname', 'lastname', 'email', 'password',
+    ];
+
+    // The attributes that should be hidden for arrays. (think of JSON serialization)
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
     /**
      * Run the migrations.
      *

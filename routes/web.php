@@ -24,6 +24,9 @@ Route::name('summaries.')->prefix('/summaries')->group(function () {
 
     Route::get('search', 'SummariesController@search')
         ->name('search');
+
+    Route::get('summaries', 'SummariesController@summaries')
+        ->name('summaries');
 });
 
 Route::get('/summary/{id}', function ($id) {
@@ -43,3 +46,7 @@ Route::get('/logout', function () {
     // ...
     return view('login');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

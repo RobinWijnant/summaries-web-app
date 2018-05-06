@@ -1,3 +1,7 @@
+html, body {
+    height: 100%;
+}
+
 // Home - Searchbar
 #searchbar {
     max-width: 700px;
@@ -25,5 +29,31 @@
     // Nav - Vertical separator
     .navSeparator {
         display: inline-block;
+    }
+}
+
+// Errors - List
+.alert__list {
+    padding-left: 1em;
+}
+
+// Login - Wrapper
+.login__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+// Login - Form
+.login__form {
+    width: 40%;
+    min-width: 300px;
+
+    img, h1 {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        text-align: center;
     }
 }

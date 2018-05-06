@@ -3,16 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Summary;
-use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
-    public function show()
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        $recentSummaries = Summary::orderBy('id', 'desc')->take(4)->get();
-        return view('home', [
-            'recentSummaries' => $recentSummaries
-        ]);
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('home');
     }
 }

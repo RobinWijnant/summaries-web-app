@@ -14843,6 +14843,11 @@ a.text-dark:focus {
   clip: auto;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 #searchbar {
   max-width: 700px;
 }
@@ -14866,5 +14871,35 @@ a.text-dark:focus {
   .navSeparator {
     display: inline-block;
   }
+}
+
+.alert__list {
+  padding-left: 1em;
+}
+
+.login__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100%;
+}
+
+.login__form {
+  width: 40%;
+  min-width: 300px;
+}
+
+.login__form img,
+.login__form h1 {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  text-align: center;
 }
 
