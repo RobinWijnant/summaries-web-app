@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Summary;
 use App\School;
 use App\Education;
@@ -11,9 +12,45 @@ use Session;
 
 class SummariesController extends Controller
 {
-    public function search()
+    public function search(Request $request)
     {
-        return view('summaries.search');
+        $summaries = DB::table('summaries')
+            ->join('courses', 'summaries.course_id', '=', 'courses.id')
+            ->join('educations', 'courses.education_id', '=', 'educations.id')
+            ->join('schools', 'educations.school_id', '=', 'schools.id')
+            ->select('summaries.*', 'summaries.course_id', 'courses.education_id', 'educations.school_id')
+            ->get();
+
+        if ($request->search) {
+            $summaries = $summaries->where('name', 'like', '%'.$request->search.'%');
+        }
+
+        if ($request->course) {
+            $summaries = $summaries->where('course_id', $request->course);
+        }
+
+        if ($request->education) {
+            $summaries = $summaries->where('education_id', $request->education);
+        }
+
+        if ($request->school) {
+            $summaries = $summaries->where('school_id', $request->school);
+        }
+
+        $placeholder = ['' => null];
+        $schools = School::pluck('name', 'id')->toArray() + $placeholder;
+        $educations = Education::pluck('name', 'id')->toArray() + $placeholder;
+        $courses = Course::pluck('name', 'id')->toArray() + $placeholder;
+        $summaries = $summaries->toArray();
+
+        //dd($summaries);
+
+        return view('summaries.search', [
+            'summaries' => $summaries,
+            'schools' => $schools,
+            'educations' => $educations,
+            'courses' => $courses
+        ]);
     }
 
     public function summaries()

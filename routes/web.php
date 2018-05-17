@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'HomeController@show')
+Route::get('/', 'SummariesController@search')
     ->name('home');
 
 Route::name('summaries.')->prefix('/summaries')->group(function () {

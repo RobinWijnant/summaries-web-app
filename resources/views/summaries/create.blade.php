@@ -32,7 +32,7 @@
             {{ Form::file('pdf', ['class' => 'form-control-file']) }}
         </div>
         <div class="form-group">
-                {{ Form::submit('Uploaden', ['class' => 'btn btn-primary mt-3']) }}
+            {{ Form::submit('Uploaden', ['class' => 'btn btn-primary mt-3']) }}
         </div>
     {!! Form::close() !!}
 

@@ -13,12 +13,12 @@
         {{ Form::password('password', ['class' => 'form-control mt-2', 'placeholder' => 'Wachtwoord']) }}
         <div class="checkbox my-3 text-left">
             <label>
-            {{ Form::checkbox('remember-me', 'remember-me') }} Remember me
+            {{ Form::checkbox('remember-me', 'remember-me') }} Onthoud me
             </label>
         </div>
         {{ Form::submit('Aanmelden', ['class' => 'btn btn-primary float-right']) }}
         <a class="link float-left pt-2" href="{{ route('password.request') }}">
-            Forgot Your Password?
+            Wachtwoord vergeten?
         </a>
     {!! Form::close() !!}
 </div>
