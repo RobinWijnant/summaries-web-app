@@ -11,42 +11,40 @@
 |
 */
 
-Route::get('/', 'SummariesController@search')
+Route::get('/', 'HomeController@index')
     ->name('home');
 
-Route::name('summaries.')->prefix('/summaries')->group(function () {
+Route::name('me.')->prefix('me')->group(function () {
 
-    Route::get('create', 'SummariesController@create')
+    Route::get('create', 'MeController@create')
         ->name('create');
 
-    Route::post('create', 'SummariesController@store')
+    Route::post('create', 'MeController@store')
         ->name('store');
 
-    Route::get('search', 'SummariesController@search')
-        ->name('search');
-
-    Route::get('summaries', 'SummariesController@summaries')
+    Route::get('', 'MeController@summaries')
         ->name('summaries');
+
+    Route::get('/', 'MeController@summaries')
+        ->name('overview');
 });
 
-Route::get('/summary/{id}', function ($id) {
-    return view('summary');
-});
+Route::name('summaries.')->group(function () {
 
-Route::get('/course/{id}', function ($id) {
-    return view('course');
-});
+    Route::get('summaries/search', 'Summaries@search')
+    ->name('search');
 
-Route::get('/login', function () {
-    return view('login');
-})->name('user.login');
+    Route::get('summary/{id}', 'Summaries@summary')
+    ->name('summary');
 
-Route::get('/logout', function () {
-    // logout code
-    // ...
-    return view('login');
+    Route::get('course/{id}', 'Summaries@course')
+    ->name('course');
+
+    Route::get('school/{id}', 'Summaries@school')
+    ->name('school');
+
+    Route::get('tag/{id}', 'Summaries@tag')
+    ->name('tag');
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
