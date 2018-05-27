@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Summary;
 use App\School;
 use App\Education;
@@ -18,7 +18,11 @@ class SummaryController extends Controller
      */
     public function index()
     {
-        //
+        $summariesFromUser = Summary::where('user_id', Auth::id())->get();
+
+        return view('summaries.index', [
+            'summaries' => $summariesFromUser
+        ]);
     }
 
     /**

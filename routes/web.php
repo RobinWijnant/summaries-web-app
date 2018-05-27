@@ -11,21 +11,30 @@
 |
 */
 
+// Home
 Route::get('/', 'HomeController@home')
     ->name('home');
+
+// Summaries
+Route::middleware('auth')->group(function () {
+    Route::resource('summaries', 'SummaryController', ['except' => ['show']]);
+});
+
+Route::get('summaries/{id}', 'SummaryController@show')
+    ->name('summaries.show');
 
 Route::get('search', 'SummaryController@search')
     ->name('summaries.search');
 
-Route::resource('summaries', 'SummaryController');
-Route::resource('courses', 'CourseController')->only([
-    'show'
-]);
-Route::resource('school', 'SchoolController')->only([
-    'show'
-]);
-Route::resource('tags', 'TagController')->only([
-    'show'
-]);
+// Other
+// Route::resource('courses', 'CourseController')->only([
+//     'show'
+// ]);
+// Route::resource('school', 'SchoolController')->only([
+//     'show'
+// ]);
+// Route::resource('tags', 'TagController')->only([
+//     'show'
+// ]);
 
 Auth::routes();

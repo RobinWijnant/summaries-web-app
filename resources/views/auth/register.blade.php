@@ -1,4 +1,5 @@
 @extends('base')
+@section('title', 'Register')
 
 @section('content')
 <div class="container my-5">

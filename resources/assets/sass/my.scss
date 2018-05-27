@@ -2,6 +2,11 @@ html, body {
     height: 100%;
 }
 
+// Select2
+.select2-container--bootstrap .select2-selection--single {
+    height: 36.4px;
+}
+
 // Home - Searchbar
 #searchbar {
     max-width: 700px;
@@ -29,6 +34,34 @@ html, body {
     // Nav - Vertical separator
     .navSeparator {
         display: inline-block;
+    }
+}
+
+// Search - Search filters
+$filterBtnWidth: 3.4rem;
+#searchFilters {
+
+    .float-left, .float-right {
+        width: 100%;
+    }
+
+    .float-left .col-md-3 {
+        
+    }
+}
+
+@include media-breakpoint-up(md) {
+
+    // Search - Search filters
+    #searchFilters {
+
+        .float-left {
+            width: calc(100% - #{$filterBtnWidth});
+        }
+    
+        .float-right {
+            width: $filterBtnWidth;
+        }
     }
 }
 

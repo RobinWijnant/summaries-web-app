@@ -1,24 +1,30 @@
 @extends('base')
+@section('title', 'Samenvatting zoeken')
 
 @section('content')
-<div class="container">
-  @if (session('success'))
-    @component('common.success')
-      {{ session('success') }}
-    @endcomponent
-  @endif
-</div>
 <div class="container my-5">
   <h2 class="mb-4">Samenvatting zoeken</h2>
 
   @include('common.errors')
 
-  {!! Form::open(['route' => 'summaries.search', 'method' => 'GET']) !!}
-      {{ Form::text('q', null, ['class' => 'form-control', 'placeholder' => 'Zoek op titel', 'autocomplete' => 'off']) }}
-      {{ Form::select('school', $schools, null, ['class' => 'form-control select2School']) }}
-      {{ Form::select('education', $educations, null, ['class' => 'form-control select2Education']) }}
-      {{ Form::select('course', $courses, null, ['class' => 'form-control select2Course']) }}
-      {{ Form::submit('Filter', ['class' => 'btn btn-primary mt-3']) }}
+  {!! Form::open(['route' => 'summaries.search', 'method' => 'GET', 'class' => 'clearfix', 'id' => 'searchFilters']) !!}
+    <div class="float-left form-row">
+      <div class="col-md-3 mb-1">
+        {{ Form::text('q', null, ['class' => 'form-control', 'placeholder' => 'Zoek op titel', 'autocomplete' => 'off']) }}
+      </div>
+      <div class="col-md-3 mb-1">
+        {{ Form::select('school', $schools, null, ['class' => 'form-control col-md-3 select2School']) }}
+      </div>
+      <div class="col-md-3 mb-1">
+        {{ Form::select('education', $educations, null, ['class' => 'form-control col-md-3 select2Education']) }}
+      </div>
+      <div class="col-md-3 mb-1">
+        {{ Form::select('course', $courses, null, ['class' => 'form-control col-md-3 select2Course']) }}
+      </div>
+    </div>
+    <div class="float-right text-right">
+      {{ Form::submit('Filter', ['class' => 'btn btn-primary']) }}
+    </div>
   {!! Form::close() !!}
 
 </div>

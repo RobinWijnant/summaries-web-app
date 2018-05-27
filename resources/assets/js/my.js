@@ -6,12 +6,12 @@ $(document).ready(function() {
 
     // Comboboxes
     $('.select2School').select2({
-        placeholder: 'Selecteer een school',
+        placeholder: 'School',
     });
     $('.select2Education').select2({
-        placeholder: 'Selecteer een opleiding',
+        placeholder: 'Opleiding',
     });
     $('.select2Course').select2({
-        placeholder: 'Selecteer een vak',
+        placeholder: 'Vak',
     });
 });

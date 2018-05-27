@@ -21,19 +21,30 @@
         </button>
         <div class="collapse navbar-collapse right" id="navbarTogglerTest">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
+            <li class="nav-item {{ Route::currentRouteName() == 'home' ? 'active' : '' }}">
               <a class="nav-link mr-2" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item {{ Request::is('search') ? 'active' : '' }}">
+            <li class="nav-item {{ Route::currentRouteName() == 'summaries.search' ? 'active' : '' }}">
               <a class="nav-link mr-2" href="{{ route('summaries.search') }}">Samenvattingen</a>
             </li>
             <li class="nav-item navSeparator"><span class="nav-link mr-2" href="#">|</span></li>
-            <li class="nav-item {{ Request::is('login') ? 'active' : '' }}">
-                <a class="nav-link mr-3" href="{{ route('login') }}">Login</a>
+
+            @if (Auth::check())
+              <li class="nav-item {{ Route::currentRouteName() == 'summaries.index' ? 'active' : '' }}">
+                  <a class="nav-link mr-3" href="{{ route('summaries.index') }}">My summaries</a>
+                </li>
+              <li class="nav-item">
+                <a class="btn btn-outline-primary btn-sm mt-1" href="{{ route('logout') }}">Logout</a>
               </li>
-            <li class="nav-item">
-              <a class="btn btn-outline-primary btn-sm mt-1" href="{{ route('register') }}">Registreren</a>
-            </li>
+            @else
+              <li class="nav-item {{ Route::currentRouteName() == 'login' ? 'active' : '' }}">
+                  <a class="nav-link mr-3" href="{{ route('login') }}">Login</a>
+                </li>
+              <li class="nav-item">
+                <a class="btn btn-outline-primary btn-sm mt-1" href="{{ route('register') }}">Registreren</a>
+              </li>
+            @endif
+
           </ul>
         </div>
       </div>
