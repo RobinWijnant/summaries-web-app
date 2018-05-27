@@ -39,9 +39,9 @@
       </div>
     </nav>
     @show
-
+    
     @yield('content')
-
+    
     @section('footer')
     <footer class="text-muted container">
       <p class="float-right">

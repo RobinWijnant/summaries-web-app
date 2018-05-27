@@ -23,10 +23,10 @@ class HomeController extends Controller
      */
     public function home()
     {
-        $recentSummaries = Summary::orderBy('id', 'desc')->take(4)->get();
+        $recentSummaries = Summary::orderBy('id', 'desc')->take(3)->get();
 
         return view('home', [
-            'recentSummaries' => $recentSummaries
+            'summaries' => $recentSummaries
         ]);
     }
 }

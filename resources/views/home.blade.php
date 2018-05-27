@@ -17,36 +17,5 @@
 </div>
 </section>
 <h3 class="pt-4 text-center">Recent toegevoegde samenvattingen</h3>
-<div class="py-5">
-  <div class="container">
-    <div class="row">
-      
-      @forelse ($recentSummaries as $summary)
-        <div class="col-md-4">
-          <div class="card mb-4 box-shadow">
-            <div class="card-img-top recentSummaryImg" style="background-image:url('{{ asset('img/thumbs/'.$summary->user->id.'/'.$summary->id.'_'.$summary->name.'.jpg') }}')" alt="Thumbnail {{ $summary->name }}">
-            </div>
-            <div class="card-body">
-              <p class="card-title font-weight-bold">{{ $summary->name }}</p>
-              <p class="card-subtitle"><i class="fas fa-chalkboard"></i> {{ $summary->course->name }}</p>
-              <p class="card-subtitle"><i class="fas fa-graduation-cap"></i> {{ $summary->course->education->name }}</p>
-              <p class="card-subtitle"><i class="fas fa-school"></i> {{ $summary->course->education->school->name }}</p>
-              <p class="card-text">
-                <span class="badge badge-secondary">Java</span>
-                <span class="badge badge-secondary">MySQL</span>
-              </p>
-              <div class="d-flex justify-content-between align-items-center">
-              <a class="btn btn-sm btn-outline-secondary" href="/summaries/{{ $summary->id }}">Bekijken</a>
-                <small class="text-muted">{{ Carbon\Carbon::parse($summary->created_at)->diffForHumans() }}</small>
-              </div>
-            </div>
-          </div>
-        </div>
-      @empty
-          <p>No recent summaries found</p>
-      @endforelse
-      
-    </div>
-  </div>
-</div>
+@include('summaries.partials.list')
 @endsection

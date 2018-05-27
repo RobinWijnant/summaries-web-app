@@ -14,20 +14,15 @@
   @include('common.errors')
 
   {!! Form::open(['route' => 'summaries.search', 'method' => 'GET']) !!}
-      {{ Form::text('q', null, ['class' => 'form-control', 'placeholder' => 'Zoek samenvattingen', 'autocomplete' => 'off']) }}
+      {{ Form::text('q', null, ['class' => 'form-control', 'placeholder' => 'Zoek op titel', 'autocomplete' => 'off']) }}
       {{ Form::select('school', $schools, null, ['class' => 'form-control select2School']) }}
       {{ Form::select('education', $educations, null, ['class' => 'form-control select2Education']) }}
       {{ Form::select('course', $courses, null, ['class' => 'form-control select2Course']) }}
       {{ Form::submit('Filter', ['class' => 'btn btn-primary mt-3']) }}
   {!! Form::close() !!}
 
-  <ul>
-  @foreach ($summaries as $summary)
-    
-      <li>{{ print_r($summary) }}</li>
-    
-  @endforeach
-  </ul>
-
 </div>
+
+@include('summaries.partials.list')
+
 @endsection

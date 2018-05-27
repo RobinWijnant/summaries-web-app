@@ -113,36 +113,37 @@ class SummaryController extends Controller
 
     public function search(Request $request)
     {
-        $summaries = DB::table('summaries')
-            ->join('courses', 'summaries.course_id', '=', 'courses.id')
-            ->join('educations', 'courses.education_id', '=', 'educations.id')
-            ->join('schools', 'educations.school_id', '=', 'schools.id')
-            ->select('summaries.*', 'summaries.course_id', 'courses.education_id', 'educations.school_id')
-            ->get();
+        $summaries = Summary::query();
 
         if ($request->q) {
-            $summaries = $summaries->where('name', 'like', '%'.$request->q.'%');
+            $summaries->where('name', 'like', '%'.$request->q.'%');
         }
 
         if ($request->course) {
-            $summaries = $summaries->where('course_id', $request->course);
+            $summaries->where('course_id', $request->course);
         }
 
         if ($request->education) {
-            $summaries = $summaries->where('education_id', $request->education);
+            $education_id = $request->education;
+            $summaries->whereHas('course', function ($q) use($education_id){
+                $q->where('education_id', $education_id);
+            });
         }
 
         if ($request->school) {
-            $summaries = $summaries->where('school_id', $request->school);
+            $school_id = $request->school;
+            $summaries->whereHas('course', function ($q) use($school_id){
+                $q->whereHas('education', function ($q2) use($school_id) {
+                    $q2->where('school_id', $school_id);
+                });
+            });
         }
 
         $placeholder = ['' => null];
         $schools = School::pluck('name', 'id')->toArray() + $placeholder;
         $educations = Education::pluck('name', 'id')->toArray() + $placeholder;
         $courses = Course::pluck('name', 'id')->toArray() + $placeholder;
-        $summaries = $summaries->toArray();
-
-        //dd($summaries);
+        $summaries = $summaries->get();
 
         return view('summaries.search', [
             'summaries' => $summaries,
