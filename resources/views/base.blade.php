@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" type="image/png" href="https://www.freepnglogos.com/uploads/pepsi-png-logo/pepsi-png-logo-4.png"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <title>Summaries - @yield('title')</title>
     <link href = {{ asset("css/app.css") }} rel="stylesheet" />
   </head>
@@ -12,7 +13,7 @@
     @section('nav')
     <nav class="navbar-expand-sm navbar navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
           <img src="https://www.freepnglogos.com/uploads/pepsi-png-logo/pepsi-png-logo-4.png" width="30" height="30" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerTest" aria-controls="navbarTogglerTest" aria-expanded="true" aria-label="Toggle navigation">
@@ -42,7 +43,7 @@
     @yield('content')
 
     @section('footer')
-    <footer class="text-muted">
+    <footer class="text-muted container">
       <p class="float-right">
         <a href="#">Back to top</a>
       </p>

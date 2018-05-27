@@ -11,40 +11,21 @@
 |
 */
 
-Route::get('/', 'HomeController@index')
+Route::get('/', 'HomeController@home')
     ->name('home');
 
-Route::name('me.')->prefix('me')->group(function () {
+Route::get('search', 'SummaryController@search')
+    ->name('summaries.search');
 
-    Route::get('create', 'MeController@create')
-        ->name('create');
-
-    Route::post('create', 'MeController@store')
-        ->name('store');
-
-    Route::get('', 'MeController@summaries')
-        ->name('summaries');
-
-    Route::get('/', 'MeController@summaries')
-        ->name('overview');
-});
-
-Route::name('summaries.')->group(function () {
-
-    Route::get('summaries/search', 'Summaries@search')
-    ->name('search');
-
-    Route::get('summary/{id}', 'Summaries@summary')
-    ->name('summary');
-
-    Route::get('course/{id}', 'Summaries@course')
-    ->name('course');
-
-    Route::get('school/{id}', 'Summaries@school')
-    ->name('school');
-
-    Route::get('tag/{id}', 'Summaries@tag')
-    ->name('tag');
-});
+Route::resource('summaries', 'SummaryController');
+Route::resource('courses', 'CourseController')->only([
+    'show'
+]);
+Route::resource('school', 'SchoolController')->only([
+    'show'
+]);
+Route::resource('tags', 'TagController')->only([
+    'show'
+]);
 
 Auth::routes();
