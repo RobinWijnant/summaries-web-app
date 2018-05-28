@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Summary;
 use App\School;
 use App\Education;
@@ -58,8 +59,15 @@ class SummaryController extends Controller
             'school' => 'required|exists:schools,id',
             'education' => 'required|exists:educations,id',
             'course' => 'required|exists:courses,id',
+            'pdf' => 'required|file|mimetypes:application/pdf|max:20000'
         ]);
 
+        //File upload
+        $filename = mb_ereg_replace("([^\w\s\d\-_~,;\[\]\(\).])", '', $request->name) . '.pdf';
+        Storage::delete($filename);
+        $path = Storage::putFileAs('summaries/'.Auth::id(), $request->file('pdf'), $filename);
+
+        // Create summary
         $summary = new Summary;
         $summary->user_id = 1;
         $summary->name = $request->name;
@@ -67,7 +75,7 @@ class SummaryController extends Controller
         $summary->save();
 
         $msg = 'De nieuwe samenvatting \'' . $request->name . '\' werd succesvol opgeslaan';
-        return redirect()->route('summaries.summaries')->with('success', $msg);
+        return redirect()->route('summaries.index')->with('success', $msg);
     }
 
     /**

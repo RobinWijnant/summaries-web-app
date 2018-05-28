@@ -1,8 +1,8 @@
 @extends('base')
 @if(isset($summary))
-    @section('title', 'Edit')
+    @section('title', 'Wijzigen')
 @else
-    @section('title', 'Create')
+    @section('title', 'Nieuwe samenvatting')
 @endif
 
 <?php
@@ -17,13 +17,13 @@
     @if(isset($summary))
         <h2 class="mb-4">Samenvatting bewerken</h2>
     @else
-        <h2 class="mb-4">Samenvatting uploaden</h2>
+        <h2 class="mb-4">Nieuwe samenvatting</h2>
     @endif
     
 
     @include('common.errors')
 
-    {!! Form::open(['route' => 'summaries.store', 'method' => 'POST']) !!}
+    {!! Form::open(['route' => 'summaries.store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
         <div class="form-group">
             {{ Form::label('name', 'Titel') }}
             {{ Form::text('name', $sName, ['class' => 'form-control', 'placeholder' => 'Titel']) }}
@@ -46,14 +46,15 @@
         </div>
         <div class="form-group">
             {{ Form::label('pdf', 'PDF-Bestand') }}
-            {{ Form::file('pdf', ['class' => 'form-control-file']) }}
+            {{ Form::file('pdf', ['class' => 'form-control-file', 'accept' => 'application/pdf']) }}
         </div>
         <div class="form-group">
             @if(isset($summary))
                 {{ Form::submit('Opslaan', ['class' => 'btn btn-primary mt-3']) }}
                 <a href="{{ route('summaries.index') }}" class="btn btn-secondary mt-3">Annuleren</a>
             @else
-                {{ Form::submit('Uploaden', ['class' => 'btn btn-primary mt-3']) }}
+                {{ Form::submit('Toevoegen', ['class' => 'btn btn-primary mt-3']) }}
+                <a href="{{ route('summaries.index') }}" class="btn btn-secondary mt-3">Annuleren</a>
             @endif
         </div>
     {!! Form::close() !!}

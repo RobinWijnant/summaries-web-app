@@ -35,7 +35,7 @@
                 </li>
               <li class="nav-item">
                 {!! Form::open(['route' => 'logout', 'method' => 'POST']) !!}
-                  {{ Form::submit('Logout', ['class' => 'btn btn-outline-primary btn-sm mt-1']) }}
+                  {{ Form::submit('Logout', ['class' => 'nav-link mr-3 btn btn-link']) }}
                 {!! Form::close() !!}
               </li>
             @else

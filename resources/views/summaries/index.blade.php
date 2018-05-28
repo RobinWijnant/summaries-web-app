@@ -10,7 +10,10 @@
 </div>
 <div class="container my-5">
     @include('common.errors')
-    <h2 class="mb-4">Mijn samenvattingen</h2>
+    <div class="clearfix">
+        <h2 class="mb-4 float-left">Mijn samenvattingen</h2>
+        <a href="{{ route('summaries.create') }}" class="mb-4 float-right btn btn-md btn-primary">Nieuwe samenvatting</a>
+    </div>
 </div>
 
 @include('summaries.partials.list')
