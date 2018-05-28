@@ -17,7 +17,7 @@
                     </p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            @if (Auth::check() && $summary->user->id == Auth::id())
+                            @if ($summary->user->id == Auth::id())
                                 <a class="btn btn-sm btn-outline-secondary" href="{{ route('summaries.show', ['id' => $summary->id]) }}">Bekijken</a>                            
                                 <a class="btn btn-sm btn-outline-primary" href="{{ route('summaries.edit', ['id' => $summary->id]) }}">Bewerken</a>                            
                                 <a class="btn btn-sm btn-outline-danger" href="{{ route('summaries.destroy', ['id' => $summary->id]) }}">Verwijderen</a>                            

@@ -14848,8 +14848,9 @@ body {
   height: 100%;
 }
 
-.select2-container--bootstrap .select2-selection--single {
+.select2-container--bootstrap {
   height: 36.4px;
+  line-height: 16px;
 }
 
 #searchbar {

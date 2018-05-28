@@ -34,7 +34,9 @@
                   <a class="nav-link mr-3" href="{{ route('summaries.index') }}">My summaries</a>
                 </li>
               <li class="nav-item">
-                <a class="btn btn-outline-primary btn-sm mt-1" href="{{ route('logout') }}">Logout</a>
+                {!! Form::open(['route' => 'logout', 'method' => 'POST']) !!}
+                  {{ Form::submit('Logout', ['class' => 'btn btn-outline-primary btn-sm mt-1']) }}
+                {!! Form::close() !!}
               </li>
             @else
               <li class="nav-item {{ Route::currentRouteName() == 'login' ? 'active' : '' }}">

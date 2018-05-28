@@ -38,7 +38,7 @@ class SummaryController extends Controller
         $educations = Education::pluck('name', 'id')->toArray() + $placeholder;
         $courses = Course::pluck('name', 'id')->toArray() + $placeholder;
 
-        return view('summaries.create', [
+        return view('summaries.edit', [
             'schools' => $schools,
             'educations' => $educations,
             'courses' => $courses,
@@ -89,7 +89,20 @@ class SummaryController extends Controller
      */
     public function edit(Summary $summary)
     {
-        //
+        //Get select box data and add an empty value on top (for the placeholder)
+        $placeholder = ['' => null];
+        $schools = School::pluck('name', 'id')->toArray() + $placeholder;
+        $educations = Education::pluck('name', 'id')->toArray() + $placeholder;
+        $courses = Course::pluck('name', 'id')->toArray() + $placeholder;
+
+        $summary = Summary::find($summary->id);
+
+        return view('summaries.edit', [
+            'schools' => $schools,
+            'educations' => $educations,
+            'courses' => $courses,
+            'summary' => $summary
+        ]);
     }
 
     /**
