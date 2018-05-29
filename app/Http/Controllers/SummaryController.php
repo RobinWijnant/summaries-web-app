@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StoreSummary;
+use App\Http\Requests\UpdateSummary;
+use App\Helpers\Pdf;
 use App\Summary;
 use App\School;
 use App\Education;
@@ -52,27 +55,17 @@ class SummaryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSummary $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'school' => 'required|exists:schools,id',
-            'education' => 'required|exists:educations,id',
-            'course' => 'required|exists:courses,id',
-            'pdf' => 'required|file|mimetypes:application/pdf|max:20000'
-        ]);
-
-        //File upload
-        $filename = mb_ereg_replace("([^\w\s\d\-_~,;\[\]\(\).])", '', $request->name) . '.pdf';
-        Storage::delete($filename);
-        $path = Storage::putFileAs('summaries/'.Auth::id(), $request->file('pdf'), $filename);
-
         // Create summary
         $summary = new Summary;
-        $summary->user_id = 1;
+        $summary->user_id = Auth::id();
         $summary->name = $request->name;
         $summary->course_id = $request->course;
         $summary->save();
+
+        $pdfPath = Pdf::uploadPdf($request->file('pdf'), $summary);
+        Pdf::createThumbnailFromPdf($pdfPath, $summary);
 
         $msg = 'De nieuwe samenvatting \'' . $request->name . '\' werd succesvol opgeslaan';
         return redirect()->route('summaries.index')->with('success', $msg);
@@ -120,9 +113,20 @@ class SummaryController extends Controller
      * @param  \App\Summary  $summary
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Summary $summary)
+    public function update(UpdateSummary $request, Summary $summary)
     {
-        //
+        // Update summary
+        $summary->name = $request->name;
+        $summary->course_id = $request->course;
+        $summary->save();
+
+        if ($request->file('pdf')) {
+            $pdfPath = Pdf::uploadPdf($request->file('pdf'), $summary);
+            Pdf::createThumbnailFromPdf($pdfPath, $summary);
+        }
+
+        $msg = 'De samenvatting \'' . $request->name . '\' werd succesvol gewijzigd';
+        return redirect()->route('summaries.index')->with('success', $msg);
     }
 
     /**
@@ -133,7 +137,16 @@ class SummaryController extends Controller
      */
     public function destroy(Summary $summary)
     {
-        //
+        // Authorize
+        $this->authorize('summary.update', $summary);
+
+        Pdf::deletePdf($summary);
+        Pdf::deleteThumbnail($summary);
+        Pdf::cleanUserDirectory($summary->user->id);
+        $summary->delete();
+
+        $msg = 'De samenvatting \'' . $summary->name . '\' werd succesvol verwijderd';
+        return redirect()->route('summaries.index')->with('success', $msg);
     }
 
     public function search(Request $request)

@@ -1,8 +1,16 @@
 @extends('base')
 @if(isset($summary))
     @section('title', 'Wijzigen')
+    <?php 
+        $actionRoute = ['summaries.update', $summary->id];
+        $method = 'PUT';
+    ?>
 @else
     @section('title', 'Nieuwe samenvatting')
+    <?php
+        $actionRoute = 'summaries.store';
+        $method = 'POST';
+    ?>
 @endif
 
 <?php
@@ -23,7 +31,7 @@
 
     @include('common.errors')
 
-    {!! Form::open(['route' => 'summaries.store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+    {!! Form::open(['route' => $actionRoute, 'method' => $method, 'enctype' => 'multipart/form-data']) !!}
         <div class="form-group">
             {{ Form::label('name', 'Titel') }}
             {{ Form::text('name', $sName, ['class' => 'form-control', 'placeholder' => 'Titel']) }}

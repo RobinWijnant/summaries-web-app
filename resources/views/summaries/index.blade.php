@@ -1,4 +1,5 @@
 @extends('base')
+@section('title', 'Mijn samenvattingen')
 
 @section('content')
 <div class="container">
