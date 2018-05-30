@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" type="image/png" href="https://www.freepnglogos.com/uploads/pepsi-png-logo/pepsi-png-logo-4.png"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Summaries - @yield('title')</title>
     <link href = {{ asset("css/app.css") }} rel="stylesheet" />
   </head>
@@ -31,7 +32,7 @@
 
             @if (Auth::check())
               <li class="nav-item {{ Route::currentRouteName() == 'summaries.index' ? 'active' : '' }}">
-                  <a class="nav-link mr-3" href="{{ route('summaries.index') }}">My summaries</a>
+                  <a class="nav-link mr-3" href="{{ route('summaries.index') }}">Mijn samenvattingen</a>
                 </li>
               <li class="nav-item">
                 {!! Form::open(['route' => 'logout', 'method' => 'POST']) !!}
