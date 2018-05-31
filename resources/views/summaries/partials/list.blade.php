@@ -4,11 +4,17 @@
         @foreach ($summaries as $summary)
             <div class="col-md-4">
                 <div class="card mb-4 box-shadow">
-                    <?php $thumbnailPath = asset('storage/summaries/'.$summary->user->id.'/thumbs/'.$summary->id.'.jpg'); ?>
-                    <div class="card-img-top summaryImg" style="background-image:url('{{ $thumbnailPath }}')" alt="Thumbnail {{ $summary->name }}">
-                    </div>
+                    <?php $thumbnailPath = \App\Helpers\Pdf::getThumbPath($summary); ?>
+                    <a href="{{ route('summaries.show', ['id' => $summary->id]) }}">
+                        <div class="card-img-top summaryImg" style="background-image:url('{{ $thumbnailPath }}')" alt="Thumbnail {{ $summary->name }}">
+                        </div>
+                    </a>
                     <div class="card-body">
-                        <p class="card-title font-weight-bold">{{ $summary->name }}</p>
+                        <p class="card-title font-weight-bold">
+                            <a href="{{ route('summaries.show', ['id' => $summary->id]) }}" class="text-dark">
+                                {{ $summary->name }}
+                            </a>
+                        </p>
                         <p class="card-subtitle"><i class="fas fa-chalkboard"></i> {{ $summary->course->name }}</p>
                         <p class="card-subtitle"><i class="fas fa-graduation-cap"></i> {{ $summary->course->education->name }}</p>
                         <p class="card-subtitle"><i class="fas fa-school"></i> {{ $summary->course->education->school->name }}</p>

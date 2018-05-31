@@ -20,7 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('summaries', 'SummaryController', ['except' => ['show']]);
 });
 
-Route::get('summaries/{id}', 'SummaryController@show')
+Route::get('summaries/{summary}', 'SummaryController@show')
     ->name('summaries.show');
 
 Route::get('search', 'SummaryController@search')
@@ -38,3 +38,6 @@ Route::get('search', 'SummaryController@search')
 // ]);
 
 Auth::routes();
+
+Route::get('registered', 'Auth\RegisterController@complete')
+    ->name('registered');

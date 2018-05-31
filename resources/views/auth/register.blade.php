@@ -15,7 +15,7 @@
             </div>
             <div class="form-group col-md-3">
                 {{ Form::label('lastname', 'Achternaam') }}
-                {{ Form::text('lastanem', '', ['class' => 'form-control', 'placeholder' => 'Achternaam']) }}
+                {{ Form::text('lastname', '', ['class' => 'form-control', 'placeholder' => 'Achternaam']) }}
             </div>
             <div class="form-group col-md-6">
                 {{ Form::label('email', 'E-mailadres') }}

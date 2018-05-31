@@ -79,7 +79,9 @@ class SummaryController extends Controller
      */
     public function show(Summary $summary)
     {
-        //
+        return view('summaries.show', [
+            'summary' => $summary,
+        ]);
     }
 
     /**

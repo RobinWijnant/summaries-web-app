@@ -9,10 +9,10 @@ use Imagick;
 class Pdf {
 
     public static function uploadPdf($pdfFile, Summary $summary) {
-        $FileName = $summary->id . '.pdf';
+        $fileName = $summary->id . '.pdf';
         $directory = 'public/summaries/' . $summary->user->id . '/pdf';
 
-        $path = Storage::putFileAs($directory, $pdfFile, $FileName);
+        $path = Storage::putFileAs($directory, $pdfFile, $fileName);
         return $path;
     }
 
@@ -24,7 +24,7 @@ class Pdf {
 
         $im = new Imagick();
         $im->readImage($PdfPath . '[0]');
-        $im->setResolution(300, 300);
+        $im->setResolution(600, 600);
         $im->setImageBackgroundColor('white');
         $im->setImageAlphaChannel(11);
         $im->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
@@ -59,9 +59,21 @@ class Pdf {
         }
     }
 
-    public static function getSafeFileName($fileName) {
-        $safeName = mb_ereg_replace("([^\w\s\d\-_~,;\[\]\(\).])", '', $fileName);
-        //$safeName = str_replace(' ', '_', $safeName);
-        return $safeName;
+    // public static function getSafeFileName($fileName) {
+    //     $safeName = mb_ereg_replace("([^\w\s\d\-_~,;\[\]\(\).])", '', $fileName);
+    //     //$safeName = str_replace(' ', '_', $safeName);
+    //     return $safeName;
+    // }
+
+    public static function getPdfPath(Summary $summary) {
+        $directory = '/storage/summaries/' . $summary->user->id . '/pdf';        
+        $fileName = $summary->id . '.pdf';
+        return $directory . '/' . $fileName;
+    }
+
+    public static function getThumbPath(Summary $summary) {
+        $directory = 'storage/summaries/' . $summary->user->id . '/thumbs';
+        $fileName = $summary->id . '.jpg';
+        return $directory . '/' . $fileName;
     }
 }
