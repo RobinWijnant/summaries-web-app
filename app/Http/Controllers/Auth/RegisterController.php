@@ -27,10 +27,10 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    //protected $redirectTo = '/registered';
+    // protected $redirectTo = '/summaries';
     protected function redirectTo()
     {
-        return route('registered');
+        return route('summaries.index');
     }
 
     /**
@@ -73,11 +73,5 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-    }
-
-    protected function complete()
-    {
-        $msg = 'U bent succesvol geregistreerd en ingelogd.';
-        return view('summaries.index', ['success' => $msg]);
     }
 }

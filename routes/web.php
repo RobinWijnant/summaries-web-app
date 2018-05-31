@@ -38,6 +38,3 @@ Route::get('search', 'SummaryController@search')
 // ]);
 
 Auth::routes();
-
-Route::get('registered', 'Auth\RegisterController@complete')
-    ->name('registered');

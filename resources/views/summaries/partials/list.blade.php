@@ -45,7 +45,7 @@
     </div>
     
     @if(count($summaries) === 0)
-        <p>No summaries found</p>
+        <p>Je hebt momenteel nog geen samenvattingen toegevoegd.</p>
     @endif
 
 </div>
