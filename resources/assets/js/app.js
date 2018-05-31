@@ -21,5 +21,18 @@ require('select2/dist/js/select2.min');
 //     el: '#app'
 // });
 
-// Import My JS
-require('./my');
+
+// Default bootstrap theme for select2
+$.fn.select2.defaults.set('theme', 'bootstrap');
+$.fn.select2.defaults.set('width', '100%');
+
+
+var currPage = window.location.href;
+currPage = currPage.substr(currPage.lastIndexOf('/') + 1);
+
+if (currPage == 'edit') {
+    require('./summaries.edit');
+}
+if (currPage == 'create') {
+    require('./summaries.create')
+}

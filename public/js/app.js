@@ -11144,7 +11144,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(10);
-module.exports = __webpack_require__(39);
+module.exports = __webpack_require__(38);
 
 
 /***/ }),
@@ -11174,8 +11174,20 @@ __webpack_require__(37);
 //     el: '#app'
 // });
 
-// Import My JS
-__webpack_require__(38);
+
+// Default bootstrap theme for select2
+$.fn.select2.defaults.set('theme', 'bootstrap');
+$.fn.select2.defaults.set('width', '100%');
+
+var currPage = window.location.href;
+currPage = currPage.substr(currPage.lastIndexOf('/') + 1);
+
+if (currPage == 'edit') {
+  __webpack_require__(49);
+}
+if (currPage == 'create') {
+  __webpack_require__(50);
+}
 
 /***/ }),
 /* 11 */
@@ -38470,11 +38482,23 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /* 38 */
 /***/ (function(module, exports) {
 
-$(document).ready(function () {
+// removed by extract-text-webpack-plugin
 
-    // Default bootstrap theme for select2
-    $.fn.select2.defaults.set('theme', 'bootstrap');
-    $.fn.select2.defaults.set('width', '100%');
+/***/ }),
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
 
     // Comboboxes
     $('.select2School').select2({
@@ -38489,10 +38513,51 @@ $(document).ready(function () {
 });
 
 /***/ }),
-/* 39 */
+/* 50 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+$(document).ready(function () {
+
+    var domainName = 'http://' + window.location.host;
+
+    // Comboboxes
+    $('.select2School').select2({
+        placeholder: 'School'
+    });
+    $('.select2Education').select2({
+        placeholder: 'Opleiding',
+        disabled: true
+    });
+    $('.select2Course').select2({
+        placeholder: 'Vak',
+        disabled: true
+    });
+
+    var updateSelectbox = function updateSelectbox(className, url, placeholder) {
+        $.ajax(url, {
+            success: function success(object) {
+                var formatted = [];
+                Object.keys(object).map(function (key, index) {
+                    formatted.push({ 'id': key, 'text': object[key] });
+                });
+                formatted.unshift({ 'id': '', text: null });
+                $(className).empty().select2({ placeholder: placeholder, data: formatted }).prop('disabled', false).trigger('select');
+            }
+        });
+    };
+
+    $('.select2School').on('select2:select', function (e) {
+        var schoolId = e.params.data.id;
+        var url = domainName + '/api/educations-for-school/' + schoolId;
+        updateSelectbox('.select2Education', url, 'Opleiding');
+    });
+
+    $('.select2Education').on('select2:select', function (e) {
+        var educationId = e.params.data.id;
+        var url = domainName + '/api/courses-for-education/' + educationId;
+        updateSelectbox('.select2Course', url, 'Vak');
+    });
+});
 
 /***/ })
 /******/ ]);

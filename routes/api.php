@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Education;
+use App\Course;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,14 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('/educations-for-school/{id}', function (Request $request) {
+    $educations = Education::where('school_id', $request->id)->pluck('name', 'id')->toArray();
+    return response($educations, 200);
+});
+
+Route::get('/courses-for-education/{id}', function (Request $request) {
+    $courses = Course::where('education_id', $request->id)->pluck('name', 'id')->toArray();
+    return response($courses, 200);
 });
