@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
             SummariesTableSeeder::class,
             TagsTableSeeder::class,
         ]);
+        $this->call(UsersTableSeeder::class);
     }
 }

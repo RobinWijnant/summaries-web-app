@@ -22,7 +22,9 @@ class SummaryController extends Controller
      */
     public function index()
     {
-        $summariesFromUser = Summary::where('user_id', Auth::id())->simplePaginate(12);
+        $summariesFromUser = Summary::where('user_id', Auth::id())
+        ->orderBy('name')
+        ->simplePaginate(12);
 
         return view('summaries.index', [
             'summaries' => $summariesFromUser
@@ -192,7 +194,7 @@ class SummaryController extends Controller
             ->pluck('name', 'id')->toArray() + $placeholder;
         } else $courses = [];
         
-        $summaries = $summaries->simplePaginate(12);
+        $summaries = $summaries->orderByRaw('created_at DESC')->simplePaginate(12);
 
         return view('summaries.search', [
             'summaries' => $summaries,
