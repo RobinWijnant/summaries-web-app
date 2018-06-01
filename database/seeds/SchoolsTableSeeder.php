@@ -1,33 +1,48 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Carbon\Carbon;
 
 class SchoolsTableSeeder extends Seeder
 {
+
     /**
-     * Run the database seeds.
+     * Auto generated seed file
      *
      * @return void
      */
     public function run()
     {
-        DB::table('schools')->insert([
-            'name' => 'Odisee',
-            'campus' => 'Gent',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
+        
 
-        DB::table('schools')->insert([
-            'name' => 'HoGent',
-            'campus' => 'Gent',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
-
-        DB::table('schools')->insert([
-            'name' => 'Vives',
-            'campus' => 'Kortrijk',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
+        \DB::table('schools')->delete();
+        
+        \DB::table('schools')->insert(array (
+            0 => 
+            array (
+                'id' => 1,
+                'name' => 'Odisee',
+                'campus' => 'Gent',
+                'created_at' => '2018-06-01 13:14:34',
+                'updated_at' => NULL,
+            ),
+            1 => 
+            array (
+                'id' => 2,
+                'name' => 'HoGent',
+                'campus' => 'Gent',
+                'created_at' => '2018-06-01 13:14:34',
+                'updated_at' => NULL,
+            ),
+            2 => 
+            array (
+                'id' => 3,
+                'name' => 'Vives',
+                'campus' => 'Kortrijk',
+                'created_at' => '2018-06-01 13:14:34',
+                'updated_at' => NULL,
+            ),
+        ));
+        
+        
     }
 }

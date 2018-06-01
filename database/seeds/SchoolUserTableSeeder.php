@@ -1,21 +1,32 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Carbon\Carbon;
 
 class SchoolUserTableSeeder extends Seeder
 {
+
     /**
-     * Run the database seeds.
+     * Auto generated seed file
      *
      * @return void
      */
     public function run()
     {
-        DB::table('school_user')->insert([
-            'user_id' => 1,
-            'school_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
+        
+
+        \DB::table('school_user')->delete();
+        
+        \DB::table('school_user')->insert(array (
+            0 => 
+            array (
+                'id' => 1,
+                'user_id' => 1,
+                'school_id' => 1,
+                'created_at' => '2018-06-01 13:14:34',
+                'updated_at' => NULL,
+            ),
+        ));
+        
+        
     }
 }
