@@ -11176,18 +11176,66 @@ __webpack_require__(37);
 
 
 // Default bootstrap theme for select2
-$.fn.select2.defaults.set('theme', 'bootstrap');
-$.fn.select2.defaults.set('width', '100%');
+$(document).ready(function () {
+    $.fn.select2.defaults.set('theme', 'bootstrap');
+    $.fn.select2.defaults.set('width', '100%');
+});
 
 var currPage = window.location.href;
-currPage = currPage.substr(currPage.lastIndexOf('/') + 1);
+currPage = currPage.substr(currPage.lastIndexOf('/') + 1).split('?')[0];
 
 if (currPage == 'edit') {
-  __webpack_require__(49);
+    __webpack_require__(49);
 }
 if (currPage == 'create') {
-  __webpack_require__(50);
+    __webpack_require__(50);
 }
+if (currPage == 'search') {
+    __webpack_require__(49);
+}
+
+$(document).ready(function () {
+
+    var domainName = 'http://' + window.location.host;
+
+    var updateSelectbox = function updateSelectbox(className, url, placeholder) {
+        $.ajax(url, {
+            success: function success(object) {
+                var formatted = [];
+                Object.keys(object).map(function (key, index) {
+                    formatted.push({ 'id': key, 'text': object[key] });
+                });
+                formatted.unshift({ 'id': '', text: null });
+                $(className).empty().select2({ placeholder: placeholder, data: formatted }).prop('disabled', false).trigger('change');
+            }
+        });
+    };
+
+    var resetSelectBox = function resetSelectBox(className, placeholder) {
+        $(className).empty().select2({ placeholder: placeholder, data: [{ id: '', text: null }] }).prop('disabled', true).trigger('change');
+    };
+
+    if ($('.select2School').val() == '') {
+        resetSelectBox('.select2Education', 'Opleiding');
+    }
+
+    if ($('.select2Education').val() == '') {
+        resetSelectBox('.select2Course', 'Vak');
+    }
+
+    $('.select2School').on('select2:select', function (e) {
+        var schoolId = e.params.data.id;
+        var url = domainName + '/api/educations-for-school/' + schoolId;
+        updateSelectbox('.select2Education', url, 'Opleiding');
+        resetSelectBox('.select2Course', 'Vak');
+    });
+
+    $('.select2Education').on('select2:select', function (e) {
+        var educationId = e.params.data.id;
+        var url = domainName + '/api/courses-for-education/' + educationId;
+        updateSelectbox('.select2Course', url, 'Vak');
+    });
+});
 
 /***/ }),
 /* 11 */
@@ -38518,12 +38566,9 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 
-    var domainName = 'http://' + window.location.host;
-
     // Comboboxes
     $('.select2School').select2({
-        placeholder: 'School',
-        selected: 0
+        placeholder: 'School'
     }).val(null).trigger('change');
 
     $('.select2Education').select2({
@@ -38534,36 +38579,6 @@ $(document).ready(function () {
     $('.select2Course').select2({
         placeholder: 'Vak',
         disabled: true
-    });
-
-    var updateSelectbox = function updateSelectbox(className, url, placeholder) {
-        $.ajax(url, {
-            success: function success(object) {
-                var formatted = [];
-                Object.keys(object).map(function (key, index) {
-                    formatted.push({ 'id': key, 'text': object[key] });
-                });
-                formatted.unshift({ 'id': '', text: null });
-                $(className).empty().select2({ placeholder: placeholder, data: formatted }).prop('disabled', false).trigger('change');
-            }
-        });
-    };
-
-    var resetSelectBox = function resetSelectBox(className, placeholder) {
-        $(className).empty().select2({ placeholder: placeholder, data: [{ id: '', text: null }] }).prop('disabled', true).trigger('change');
-    };
-
-    $('.select2School').on('select2:select', function (e) {
-        var schoolId = e.params.data.id;
-        var url = domainName + '/api/educations-for-school/' + schoolId;
-        updateSelectbox('.select2Education', url, 'Opleiding');
-        resetSelectBox('.select2Course', 'Vak');
-    });
-
-    $('.select2Education').on('select2:select', function (e) {
-        var educationId = e.params.data.id;
-        var url = domainName + '/api/courses-for-education/' + educationId;
-        updateSelectbox('.select2Course', url, 'Vak');
     });
 });
 

@@ -43,9 +43,19 @@
         @endforeach
 
     </div>
+
+    <div class="clearfix mb-5">
+        <div class="float-right">
+            @if($summaries instanceof \Illuminate\Pagination\Paginator)
+                {{ $summaries->links() }}
+            @endif
+        </div>
+        
+    </div>
+    
     
     @if(count($summaries) === 0)
-        <p>Je hebt momenteel nog geen samenvattingen toegevoegd.</p>
+        <p>Er zijn geen samenvattingen gevonden.</p>
     @endif
 
 </div>
