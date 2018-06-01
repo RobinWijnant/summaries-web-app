@@ -12,8 +12,10 @@
 <div class="container my-5">
     @include('common.errors')
     <div class="clearfix">
-        <h2 class="mb-4 float-left">Mijn samenvattingen</h2>
-        <a href="{{ route('summaries.create') }}" class="mb-4 float-right btn btn-md btn-primary">Nieuwe samenvatting</a>
+        <h2 class="pageTitle">Mijn samenvattingen</h2>
+        <div class="titleBtns">
+          <a href="{{ route('summaries.create') }}" class="btn btn-md btn-primary">Nieuwe samenvatting</a>
+        </div>
     </div>
 </div>
 
