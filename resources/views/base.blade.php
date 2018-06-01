@@ -12,7 +12,7 @@
 
   <body>
     @section('nav')
-    <nav class="navbar-expand-sm navbar navbar-light bg-light">
+    <nav class="navbar-expand-md navbar navbar-light bg-light">
       <div class="container">
         <a class="navbar-brand" href="/">
           <img src="https://www.freepnglogos.com/uploads/pepsi-png-logo/pepsi-png-logo-4.png" width="30" height="30" alt="">

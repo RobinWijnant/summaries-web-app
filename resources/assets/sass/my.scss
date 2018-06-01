@@ -91,3 +91,68 @@ $filterBtnWidth: 3.4rem;
         text-align: center;
     }
 }
+
+// Summary list - pagination
+.pagination {
+    
+    li {
+        @extend .ml-1;
+
+        a,a:hover {
+            @extend .btn;
+            @extend .btn-outline-secondary;
+        }
+    }
+
+    .disabled {
+        span,span:hover {
+            @extend .btn;
+            @extend .btn-outline-secondary;
+            @extend .disabled;
+        }
+    }
+}
+
+// Show - pdf preview
+#pdfPreview {
+    height: 24.0rem;
+}
+
+// Show - summary details
+#summaryDetails {
+    @extend .my-5;
+}
+
+// Show - title
+.pageTitle {
+    @extend .mt-5;
+    @extend .mb-3;
+    float: none;
+}
+
+// Show - title buttons
+.titleBtns {
+    float: none;
+    @extend .my-3;
+}
+
+@include media-breakpoint-up(md) {
+
+    #pdfPreview {
+        height: 35.0rem;
+    }
+
+    #summaryDetails {
+        margin: 0 !important;
+    }
+
+    .titleBtns {
+        float: right;
+        margin: 0 !important;
+    }
+
+    .pageTitle {
+        float: left;
+        margin: 0 !important;
+    }
+}

@@ -15,20 +15,20 @@
                                 {{ $summary->name }}
                             </a>
                         </p>
-                        <p class="card-subtitle"><i class="fas fa-chalkboard"></i> {{ $summary->course->name }}</p>
-                        <p class="card-subtitle"><i class="fas fa-graduation-cap"></i> {{ $summary->course->education->name }}</p>
-                        <p class="card-subtitle"><i class="fas fa-school"></i> {{ $summary->course->education->school->name }}</p>
-                        <p class="card-text">
+                        <p class="card-subtitle my-1"><i class="fas fa-chalkboard"></i> {{ $summary->course->name }}</p>
+                        <p class="card-subtitle my-1"><i class="fas fa-graduation-cap"></i> {{ $summary->course->education->name }}</p>
+                        <p class="card-subtitle my-1"><i class="fas fa-school"></i> {{ $summary->course->education->school->name }}</p>
+                        {{-- <p class="card-text my-2">
                             <span class="badge badge-secondary">Java</span>
                             <span class="badge badge-secondary">MySQL</span>
-                        </p>
-                        <div>
+                        </p> --}}
+                        <div class="my-2">
                             @if (Route::currentRouteName() == 'summaries.index')
                                 @can('summary.update', $summary)
-                                    <a class="btn btn-sm btn-outline-primary d-inline-block" href="{{ route('summaries.edit', ['id' => $summary->id]) }}">Bewerken</a>                            
+                                    <a class="btn btn-sm btn-outline-primary d-inline-block my-1" href="{{ route('summaries.edit', ['id' => $summary->id]) }}">Bewerken</a>                            
                                 @endcan
                                 @can('summary.delete', $summary)
-                                    {!! Form::open(['route' => ['summaries.destroy', $summary->id], 'method' => 'DELETE', 'class' => 'd-inline-block']) !!}
+                                    {!! Form::open(['route' => ['summaries.destroy', $summary->id], 'method' => 'DELETE', 'class' => 'd-inline-block my-1']) !!}
                                         {{ Form::submit('Verwijderen', ['class' => 'btn btn-sm btn-outline-danger']) }}
                                     {!! Form::close() !!}
                                 @endcan
