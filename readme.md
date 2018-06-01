@@ -12,7 +12,15 @@ Run docker and install nginx workspace and mysql
 docker-compose up -d nginx workspace mysql
 ````
 
-Initialize the db
+Install composer and fill the db
+```
+docker-compose exec workspace bash
+composer install
+php artisan storage:link
+php artisan migrate:refresh --seed
+```
+
+If db does not exist
 ```
 docker-compose exec mysql bash
 mysql -u root -p
@@ -20,12 +28,4 @@ password: root
 create table summariesdb;
 exit
 exit
-```
-
-Install composer and fill the db
-```
-docker-compose exec workspace bash
-composer install
-php artisan storage:link
-php artisan migrate:refresh --seed
 ```
