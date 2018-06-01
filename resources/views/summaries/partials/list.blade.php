@@ -22,20 +22,19 @@
                             <span class="badge badge-secondary">Java</span>
                             <span class="badge badge-secondary">MySQL</span>
                         </p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <a class="btn btn-sm btn-outline-secondary" href="{{ route('summaries.show', ['id' => $summary->id]) }}">Bekijken</a>                            
+                        <div>
+                            @if (Route::currentRouteName() == 'summaries.index')
                                 @can('summary.update', $summary)
-                                    <a class="btn btn-sm btn-outline-primary" href="{{ route('summaries.edit', ['id' => $summary->id]) }}">Bewerken</a>                            
+                                    <a class="btn btn-sm btn-outline-primary d-inline-block" href="{{ route('summaries.edit', ['id' => $summary->id]) }}">Bewerken</a>                            
                                 @endcan
                                 @can('summary.delete', $summary)
-                                    {!! Form::open(['route' => ['summaries.destroy', $summary->id], 'method' => 'DELETE']) !!}
+                                    {!! Form::open(['route' => ['summaries.destroy', $summary->id], 'method' => 'DELETE', 'class' => 'd-inline-block']) !!}
                                         {{ Form::submit('Verwijderen', ['class' => 'btn btn-sm btn-outline-danger']) }}
                                     {!! Form::close() !!}
-                                @endcan                                
-                            </div>
-                            <small class="text-muted">{{ Carbon\Carbon::parse($summary->created_at)->diffForHumans() }}</small>
+                                @endcan
+                            @endif                             
                         </div>
+                        <small class="text-muted">{{ Carbon\Carbon::parse($summary->created_at)->diffForHumans() }}</small>
                     </div>
                 </div>
             </div>
