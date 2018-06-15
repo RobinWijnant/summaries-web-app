@@ -142,7 +142,7 @@ class SummaryController extends Controller
     public function destroy(Summary $summary)
     {
         // Authorize
-        $this->authorize('summary.update', $summary);
+        $this->authorize('summary.delete', $summary);
 
         Pdf::deletePdf($summary);
         Pdf::deleteThumbnail($summary);
